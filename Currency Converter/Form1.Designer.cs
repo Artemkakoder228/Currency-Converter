@@ -29,160 +29,224 @@ namespace Currency_Converter
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            label1 = new System.Windows.Forms.Label();
+            txtAmount = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            comboBox1 = new System.Windows.Forms.ComboBox();
+            comboBox2 = new System.Windows.Forms.ComboBox();
+            btnConvert = new System.Windows.Forms.Button();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            lblResult = new System.Windows.Forms.Label();
+            lblDate = new System.Windows.Forms.Label();
+            timer1 = new System.Windows.Forms.Timer(components);
+            CurrentTime = new System.Windows.Forms.Label();
+            pbSwapCurrency = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pbSwapCurrency).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Showcard Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(40, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 40);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Сума";
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label1.Location = new System.Drawing.Point(57, 24);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(142, 65);
+            label1.TabIndex = 0;
+            label1.Text = "Сума";
             // 
-            // textBox1
+            // txtAmount
             // 
-            this.textBox1.Location = new System.Drawing.Point(40, 98);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(693, 23);
-            this.textBox1.TabIndex = 1;
+            txtAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            txtAmount.Location = new System.Drawing.Point(57, 105);
+            txtAmount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            txtAmount.Name = "txtAmount";
+            txtAmount.Size = new System.Drawing.Size(1045, 61);
+            txtAmount.TabIndex = 1;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Showcard Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(40, 145);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 40);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "From";
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
+            label2.Location = new System.Drawing.Point(57, 196);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(142, 65);
+            label2.TabIndex = 2;
+            label2.Text = "From";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Showcard Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(454, 145);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 40);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "To";
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
+            label3.Location = new System.Drawing.Point(724, 196);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(78, 65);
+            label3.TabIndex = 3;
+            label3.Text = "To";
             // 
             // comboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(40, 199);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(290, 23);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            comboBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new System.Drawing.Point(57, 290);
+            comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(413, 56);
+            comboBox1.TabIndex = 4;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // comboBox2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(454, 199);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(279, 23);
-            this.comboBox2.TabIndex = 5;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            comboBox2.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new System.Drawing.Point(724, 290);
+            comboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new System.Drawing.Size(378, 56);
+            comboBox2.TabIndex = 5;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
-            // button1
+            // btnConvert
             // 
-            this.button1.Location = new System.Drawing.Point(268, 263);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(248, 52);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            btnConvert.BackColor = System.Drawing.Color.Turquoise;
+            btnConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnConvert.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            btnConvert.Location = new System.Drawing.Point(364, 442);
+            btnConvert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            btnConvert.Name = "btnConvert";
+            btnConvert.Size = new System.Drawing.Size(438, 105);
+            btnConvert.TabIndex = 6;
+            btnConvert.Text = "Конвертувати";
+            btnConvert.UseVisualStyleBackColor = false;
+            btnConvert.Click += btnConvert_Click;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Showcard Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(40, 355);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(171, 40);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Результат";
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label4.Location = new System.Drawing.Point(57, 592);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(241, 65);
+            label4.TabIndex = 7;
+            label4.Text = "Результат";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Showcard Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(408, 355);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(28, 40);
-            this.label5.TabIndex = 8;
-            this.label5.Text = ".";
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label5.ForeColor = System.Drawing.Color.Turquoise;
+            label5.Location = new System.Drawing.Point(680, 592);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(41, 65);
+            label5.TabIndex = 8;
+            label5.Text = ".";
+            label5.Click += label5_Click;
             // 
-            // label6
+            // lblResult
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Showcard Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(442, 355);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(28, 40);
-            this.label6.TabIndex = 9;
-            this.label6.Text = ".";
+            lblResult.AutoSize = true;
+            lblResult.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            lblResult.ForeColor = System.Drawing.Color.Turquoise;
+            lblResult.Location = new System.Drawing.Point(761, 592);
+            lblResult.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblResult.Name = "lblResult";
+            lblResult.Size = new System.Drawing.Size(41, 65);
+            lblResult.TabIndex = 9;
+            lblResult.Text = ".";
             // 
             // lblDate
             // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(196, 416);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(38, 15);
-            this.lblDate.TabIndex = 10;
-            this.lblDate.Text = "label7";
-            this.lblDate.Click += new System.EventHandler(this.lblDate_Click);
+            lblDate.AutoSize = true;
+            lblDate.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            lblDate.Location = new System.Drawing.Point(35, 693);
+            lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new System.Drawing.Size(0, 48);
+            lblDate.TabIndex = 10;
+            lblDate.Click += lblDate_Click;
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
+            // CurrentTime
+            // 
+            CurrentTime.AutoSize = true;
+            CurrentTime.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            CurrentTime.Location = new System.Drawing.Point(968, 693);
+            CurrentTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            CurrentTime.Name = "CurrentTime";
+            CurrentTime.Size = new System.Drawing.Size(0, 48);
+            CurrentTime.TabIndex = 11;
+            CurrentTime.Click += CurrentTime_Click;
+            // 
+            // pbSwapCurrency
+            // 
+            pbSwapCurrency.BackColor = System.Drawing.Color.Transparent;
+            pbSwapCurrency.ErrorImage = (System.Drawing.Image)resources.GetObject("pbSwapCurrency.ErrorImage");
+            pbSwapCurrency.Image = (System.Drawing.Image)resources.GetObject("pbSwapCurrency.Image");
+            pbSwapCurrency.Location = new System.Drawing.Point(500, 213);
+            pbSwapCurrency.Name = "pbSwapCurrency";
+            pbSwapCurrency.Size = new System.Drawing.Size(182, 189);
+            pbSwapCurrency.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pbSwapCurrency.TabIndex = 12;
+            pbSwapCurrency.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lblDate);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Currency Converter";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.White;
+            ClientSize = new System.Drawing.Size(1143, 750);
+            Controls.Add(pbSwapCurrency);
+            Controls.Add(CurrentTime);
+            Controls.Add(lblDate);
+            Controls.Add(lblResult);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(btnConvert);
+            Controls.Add(comboBox2);
+            Controls.Add(comboBox1);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(txtAmount);
+            Controls.Add(label1);
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            Name = "Form1";
+            Text = "Currency Converter";
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)pbSwapCurrency).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnConvert;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label CurrentTime;
+        private System.Windows.Forms.PictureBox pbSwapCurrency;
     }
 }
 
