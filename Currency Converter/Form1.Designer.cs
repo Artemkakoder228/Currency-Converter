@@ -38,13 +38,19 @@ namespace Currency_Converter
             comboBox1 = new System.Windows.Forms.ComboBox();
             comboBox2 = new System.Windows.Forms.ComboBox();
             btnConvert = new System.Windows.Forms.Button();
-            label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             lblResult = new System.Windows.Forms.Label();
-            lblDate = new System.Windows.Forms.Label();
             timer1 = new System.Windows.Forms.Timer(components);
             CurrentTime = new System.Windows.Forms.Label();
             pbSwapCurrency = new System.Windows.Forms.PictureBox();
+            Rates_Button = new System.Windows.Forms.Button();
+            label4 = new System.Windows.Forms.Label();
+            panel1 = new System.Windows.Forms.Panel();
+            label6 = new System.Windows.Forms.Label();
+            lblDate = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            Bank_btn = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pbSwapCurrency).BeginInit();
             SuspendLayout();
             // 
@@ -117,7 +123,7 @@ namespace Currency_Converter
             btnConvert.BackColor = System.Drawing.Color.Turquoise;
             btnConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnConvert.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            btnConvert.Location = new System.Drawing.Point(364, 442);
+            btnConvert.Location = new System.Drawing.Point(375, 426);
             btnConvert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             btnConvert.Name = "btnConvert";
             btnConvert.Size = new System.Drawing.Size(438, 105);
@@ -126,52 +132,30 @@ namespace Currency_Converter
             btnConvert.UseVisualStyleBackColor = false;
             btnConvert.Click += btnConvert_Click;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            label4.Location = new System.Drawing.Point(57, 592);
-            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(241, 65);
-            label4.TabIndex = 7;
-            label4.Text = "Результат";
-            // 
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = System.Drawing.Color.Gainsboro;
             label5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             label5.ForeColor = System.Drawing.Color.Turquoise;
-            label5.Location = new System.Drawing.Point(680, 592);
+            label5.Location = new System.Drawing.Point(467, 576);
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(41, 65);
+            label5.Size = new System.Drawing.Size(0, 65);
             label5.TabIndex = 8;
-            label5.Text = ".";
             label5.Click += label5_Click;
             // 
             // lblResult
             // 
             lblResult.AutoSize = true;
+            lblResult.BackColor = System.Drawing.Color.Gainsboro;
             lblResult.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            lblResult.ForeColor = System.Drawing.Color.Turquoise;
-            lblResult.Location = new System.Drawing.Point(761, 592);
+            lblResult.ForeColor = System.Drawing.SystemColors.ControlText;
+            lblResult.Location = new System.Drawing.Point(545, 576);
             lblResult.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lblResult.Name = "lblResult";
-            lblResult.Size = new System.Drawing.Size(41, 65);
+            lblResult.Size = new System.Drawing.Size(0, 65);
             lblResult.TabIndex = 9;
-            lblResult.Text = ".";
-            // 
-            // lblDate
-            // 
-            lblDate.AutoSize = true;
-            lblDate.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            lblDate.Location = new System.Drawing.Point(35, 693);
-            lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            lblDate.Name = "lblDate";
-            lblDate.Size = new System.Drawing.Size(0, 48);
-            lblDate.TabIndex = 10;
-            lblDate.Click += lblDate_Click;
             // 
             // timer1
             // 
@@ -183,7 +167,7 @@ namespace Currency_Converter
             // 
             CurrentTime.AutoSize = true;
             CurrentTime.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            CurrentTime.Location = new System.Drawing.Point(968, 693);
+            CurrentTime.Location = new System.Drawing.Point(964, 693);
             CurrentTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             CurrentTime.Name = "CurrentTime";
             CurrentTime.Size = new System.Drawing.Size(0, 48);
@@ -195,12 +179,98 @@ namespace Currency_Converter
             pbSwapCurrency.BackColor = System.Drawing.Color.Transparent;
             pbSwapCurrency.ErrorImage = (System.Drawing.Image)resources.GetObject("pbSwapCurrency.ErrorImage");
             pbSwapCurrency.Image = (System.Drawing.Image)resources.GetObject("pbSwapCurrency.Image");
-            pbSwapCurrency.Location = new System.Drawing.Point(500, 213);
+            pbSwapCurrency.Location = new System.Drawing.Point(545, 262);
             pbSwapCurrency.Name = "pbSwapCurrency";
-            pbSwapCurrency.Size = new System.Drawing.Size(182, 189);
+            pbSwapCurrency.Size = new System.Drawing.Size(125, 119);
             pbSwapCurrency.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pbSwapCurrency.TabIndex = 12;
             pbSwapCurrency.TabStop = false;
+            // 
+            // Rates_Button
+            // 
+            Rates_Button.BackColor = System.Drawing.Color.Turquoise;
+            Rates_Button.ForeColor = System.Drawing.SystemColors.ControlText;
+            Rates_Button.Location = new System.Drawing.Point(786, 20);
+            Rates_Button.Name = "Rates_Button";
+            Rates_Button.Size = new System.Drawing.Size(95, 69);
+            Rates_Button.TabIndex = 13;
+            Rates_Button.Text = "Курс";
+            Rates_Button.UseVisualStyleBackColor = false;
+            Rates_Button.Click += button1_Click;
+            // 
+            // label4
+            // 
+            label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            label4.BackColor = System.Drawing.Color.Gainsboro;
+            label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, 204);
+            label4.Location = new System.Drawing.Point(12, 550);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(1119, 100);
+            label4.TabIndex = 15;
+            label4.Text = "Ви отримаєте";
+            label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            label4.Click += label4_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = System.Drawing.SystemColors.ControlText;
+            panel1.Location = new System.Drawing.Point(0, 687);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(1147, 3);
+            panel1.TabIndex = 16;
+            // 
+            // label6
+            // 
+            label6.Location = new System.Drawing.Point(12, 697);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(50, 44);
+            label6.TabIndex = 17;
+            label6.Text = "📅";
+            label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDate
+            // 
+            lblDate.AutoSize = true;
+            lblDate.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            lblDate.Location = new System.Drawing.Point(62, 693);
+            lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new System.Drawing.Size(0, 48);
+            lblDate.TabIndex = 10;
+            lblDate.Click += lblDate_Click;
+            // 
+            // label7
+            // 
+            label7.Location = new System.Drawing.Point(920, 697);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(44, 44);
+            label7.TabIndex = 18;
+            label7.Text = "🕑";
+            label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label7.Click += label7_Click_1;
+            // 
+            // Bank_btn
+            // 
+            Bank_btn.BackColor = System.Drawing.Color.Turquoise;
+            Bank_btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            Bank_btn.Location = new System.Drawing.Point(898, 20);
+            Bank_btn.Name = "Bank_btn";
+            Bank_btn.Size = new System.Drawing.Size(95, 69);
+            Bank_btn.TabIndex = 19;
+            Bank_btn.Text = "Банк";
+            Bank_btn.UseVisualStyleBackColor = false;
+            Bank_btn.Click += Bank_btn_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = System.Drawing.Color.Turquoise;
+            button1.ForeColor = System.Drawing.SystemColors.ControlText;
+            button1.Location = new System.Drawing.Point(1007, 20);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(95, 69);
+            button1.TabIndex = 20;
+            button1.Text = "Історія";
+            button1.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -208,12 +278,17 @@ namespace Currency_Converter
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1143, 750);
+            Controls.Add(button1);
+            Controls.Add(Bank_btn);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(panel1);
+            Controls.Add(Rates_Button);
             Controls.Add(pbSwapCurrency);
             Controls.Add(CurrentTime);
             Controls.Add(lblDate);
             Controls.Add(lblResult);
             Controls.Add(label5);
-            Controls.Add(label4);
             Controls.Add(btnConvert);
             Controls.Add(comboBox2);
             Controls.Add(comboBox1);
@@ -221,6 +296,7 @@ namespace Currency_Converter
             Controls.Add(label2);
             Controls.Add(txtAmount);
             Controls.Add(label1);
+            Controls.Add(label4);
             Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             Name = "Form1";
             Text = "Currency Converter";
@@ -240,13 +316,19 @@ namespace Currency_Converter
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button btnConvert;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblResult;
-        private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label CurrentTime;
         private System.Windows.Forms.PictureBox pbSwapCurrency;
+        private System.Windows.Forms.Button Rates_Button;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button Bank_btn;
+        private System.Windows.Forms.Button button1;
     }
 }
 

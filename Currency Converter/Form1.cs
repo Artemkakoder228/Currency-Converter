@@ -28,16 +28,20 @@ namespace Currency_Converter
             comboBox1.Items.Add("USD");
             comboBox1.Items.Add("EUR");
             comboBox1.Items.Add("GBP");
-            comboBox1.Items.Add("JPY");
+            comboBox1.Items.Add("PLN");
             comboBox1.Items.Add("UAH");
+            comboBox1.Items.Add("CZK");
+            comboBox1.Items.Add("CHF");
 
             comboBox1.SelectedIndex = -1;
 
             comboBox2.Items.Add("USD");
             comboBox2.Items.Add("EUR");
             comboBox2.Items.Add("GBP");
-            comboBox2.Items.Add("JPY");
+            comboBox2.Items.Add("PLN");
             comboBox2.Items.Add("UAH");
+            comboBox2.Items.Add("CZK");
+            comboBox2.Items.Add("CHF");
 
             comboBox2.SelectedIndex = -1;
 
@@ -88,13 +92,21 @@ namespace Currency_Converter
             {
                 label5.Text = "£";
             }
-            else if (selectedCurrency == "JPY")
+            else if (selectedCurrency == "PLN")
             {
-                label5.Text = "¥";
+                label5.Text = "zł";
             }
             else if (selectedCurrency == "UAH")
             {
                 label5.Text = "₴";
+            }
+            else if (selectedCurrency == "CHF")
+            {
+                label5.Text = "Fr";
+            }
+            else if (selectedCurrency == "CZK")
+            {
+                label5.Text = "Kč";
             }
         }
         private async void Form1_Load(object sender, EventArgs e)
@@ -117,7 +129,7 @@ namespace Currency_Converter
 
             buttonToRound.Region = new System.Drawing.Region(gp);
 
-            string url = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
+            string url = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=11";
 
             try
             {
@@ -132,6 +144,38 @@ namespace Currency_Converter
             {
                 MessageBox.Show($"Не вдалося завантажити курси: {ex.Message}");
             }
+
+            int radius2 = 60;
+            Button buttonToRound_2 = Rates_Button;
+
+            System.Drawing.Drawing2D.GraphicsPath gg = new System.Drawing.Drawing2D.GraphicsPath();
+
+            gg.AddArc(0, 0, radius2, radius2, 180, 90);
+            gg.AddLine(radius2, 0, buttonToRound_2.Width - radius2, 0);
+            gg.AddArc(buttonToRound_2.Width - radius2, 0, radius2, radius2, 270, 90);
+            gg.AddLine(buttonToRound_2.Width, radius2, buttonToRound_2.Width, buttonToRound_2.Height - radius2);
+            gg.AddArc(buttonToRound_2.Width - radius2, buttonToRound_2.Height - radius2, radius2, radius2, 0, 90);
+            gg.AddLine(buttonToRound_2.Width - radius2, buttonToRound_2.Height, radius2, buttonToRound_2.Height);
+            gg.AddArc(0, buttonToRound_2.Height - radius2, radius2, radius2, 90, 90);
+            gg.CloseFigure();
+
+            buttonToRound_2.Region = new System.Drawing.Region(gg);
+
+            int radius3 = 60;
+            Button buttonToRound_3 = Bank_btn;
+
+            System.Drawing.Drawing2D.GraphicsPath gq = new System.Drawing.Drawing2D.GraphicsPath();
+
+            gq.AddArc(0, 0, radius3, radius3, 180, 90);
+            gq.AddLine(radius3, 0, buttonToRound_3.Width - radius3, 0);
+            gq.AddArc(buttonToRound_3.Width - radius3, 0, radius3, radius3, 270, 90);
+            gq.AddLine(buttonToRound_3.Width, radius3, buttonToRound_3.Width, buttonToRound_3.Height - radius3);
+            gq.AddArc(buttonToRound_3.Width - radius3, buttonToRound_3.Height - radius3, radius3, radius3, 0, 90);
+            gq.AddLine(buttonToRound_3.Width - radius3, buttonToRound_3.Height, radius3, buttonToRound_3.Height);
+            gq.AddArc(0, buttonToRound_3.Height - radius3, radius3, radius3, 90, 90);
+            gq.CloseFigure();
+
+            buttonToRound_3.Region = new System.Drawing.Region(gq);
         }
 
         private void lblDate_Click(object sender, EventArgs e)
@@ -176,8 +220,6 @@ namespace Currency_Converter
             string fromCurrency = comboBox1.Text.Split(' ')[0];
             string toCurrency = comboBox2.Text.Split(' ')[0];
 
-            decimal result = 0;
-
             CurrencyRate fromRate = apiRates.FirstOrDefault(r => r.Ccy == fromCurrency);
             CurrencyRate toRate = apiRates.FirstOrDefault(r => r.Ccy == toCurrency);
 
@@ -187,16 +229,45 @@ namespace Currency_Converter
                 return;
             }
 
-            decimal fromBuy = decimal.Parse(fromRate.Buy, CultureInfo.InvariantCulture);
-            decimal fromSale = decimal.Parse(fromRate.Sale, CultureInfo.InvariantCulture);
-            decimal toBuy = decimal.Parse(toRate.Buy, CultureInfo.InvariantCulture);
-            decimal toSale = decimal.Parse(toRate.Sale, CultureInfo.InvariantCulture);
+            if (!decimal.TryParse(fromRate.Buy, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal fromBuyRate) ||
+                !decimal.TryParse(toRate.Sale, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal toSaleRate))
+            {
+                MessageBox.Show("Не вдалося розпізнати курс валют.");
+                return;
+            }
+            if (toSaleRate == 0)
+            {
+                MessageBox.Show("Курс продажу цільової валюти не може бути нульовим.");
+                return;
+            }
 
-            decimal uahAmount = amount * fromBuy;
+            decimal uahAmount = amount * fromBuyRate;
 
-            result = uahAmount / toSale;
+            decimal result = uahAmount / toSaleRate;
 
             lblResult.Text = $"{result:N2}";
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Exchange_rate settingsForm = new Exchange_rate();
+            settingsForm.ShowDialog();
+        }
+
+        private void Bank_btn_Click(object sender, EventArgs e)
+        {
+            Bank_list settingsForm = new Bank_list ();
+            settingsForm.ShowDialog();
         }
     }
 }
