@@ -121,6 +121,7 @@ namespace Currency_Converter
             // btnConvert
             // 
             btnConvert.BackColor = System.Drawing.Color.Turquoise;
+            btnConvert.FlatAppearance.BorderSize = 0;
             btnConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnConvert.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             btnConvert.Location = new System.Drawing.Point(375, 426);
@@ -179,7 +180,7 @@ namespace Currency_Converter
             pbSwapCurrency.BackColor = System.Drawing.Color.Transparent;
             pbSwapCurrency.ErrorImage = (System.Drawing.Image)resources.GetObject("pbSwapCurrency.ErrorImage");
             pbSwapCurrency.Image = (System.Drawing.Image)resources.GetObject("pbSwapCurrency.Image");
-            pbSwapCurrency.Location = new System.Drawing.Point(545, 262);
+            pbSwapCurrency.Location = new System.Drawing.Point(533, 260);
             pbSwapCurrency.Name = "pbSwapCurrency";
             pbSwapCurrency.Size = new System.Drawing.Size(125, 119);
             pbSwapCurrency.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -189,6 +190,8 @@ namespace Currency_Converter
             // Rates_Button
             // 
             Rates_Button.BackColor = System.Drawing.Color.Turquoise;
+            Rates_Button.FlatAppearance.BorderSize = 0;
+            Rates_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             Rates_Button.ForeColor = System.Drawing.SystemColors.ControlText;
             Rates_Button.Location = new System.Drawing.Point(786, 20);
             Rates_Button.Name = "Rates_Button";
@@ -252,6 +255,8 @@ namespace Currency_Converter
             // Bank_btn
             // 
             Bank_btn.BackColor = System.Drawing.Color.Turquoise;
+            Bank_btn.FlatAppearance.BorderSize = 0;
+            Bank_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             Bank_btn.ForeColor = System.Drawing.SystemColors.ControlText;
             Bank_btn.Location = new System.Drawing.Point(898, 20);
             Bank_btn.Name = "Bank_btn";
@@ -264,6 +269,8 @@ namespace Currency_Converter
             // button1
             // 
             button1.BackColor = System.Drawing.Color.Turquoise;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button1.ForeColor = System.Drawing.SystemColors.ControlText;
             button1.Location = new System.Drawing.Point(1007, 20);
             button1.Name = "button1";

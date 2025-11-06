@@ -1,20 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Currency_Converter
 {
     public partial class Bank_list : Form
     {
+        public string SelectedBank { get; private set; }
+
         public Bank_list()
         {
             InitializeComponent();
+            SelectedBank = null;
+        }
+
+        private void btnPrivat_Click_1(object sender, EventArgs e)
+        {
+            SelectedBank = "Privat";
+            this.Close();
+        }
+
+        private void btnNbu_Click_1(object sender, EventArgs e)
+        {
+            SelectedBank = "NBU";
+            this.Close();
+        }
+
+        private void btnOschad_Click_1(object sender, EventArgs e)
+        {
+            SelectedBank = "Oschad";
+            this.Close();
         }
     }
 }

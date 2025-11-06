@@ -3,92 +3,94 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Currency_Converter.Form1;
 
 namespace Currency_Converter
 {
+    // 1. НАЗВА КЛАСУ ВІДПОВІДАЄ НАЗВІ ФАЙЛУ
     public partial class Exchange_rate : Form
     {
+        private List<StandardCurrencyRate> apiRates;
+        private string bankName;
 
-        private static readonly HttpClient client = new HttpClient();
-
-        private List<CurrencyRate> apiRates;
-
-        public Exchange_rate()
+        // 2. КОНСТРУКТОР ТАКОЖ НАЗИВАЄТЬСЯ Exchange_rate
+        public Exchange_rate(List<StandardCurrencyRate> rates, string bank)
         {
-            InitializeComponent();
+            InitializeComponent(); // Тепер це спрацює
+            this.apiRates = rates;
+            this.bankName = bank;
+            this.Text = $"Курси валют ({bankName})";
         }
 
-        public class CurrencyRate
+        // 3. ОБРОБНИК ПОДІЇ НАЗИВАЄТЬСЯ Exchange_rate_Load
+        // Переконайтеся, що у властивостях форми подія Load прив'язана саме до цього методу
+        private void Exchange_rate_Load(object sender, EventArgs e)
         {
-            [JsonPropertyName("ccy")]
-            public string Ccy { get; set; }
-
-            [JsonPropertyName("base_ccy")]
-            public string BaseCcy { get; set; }
-
-            [JsonPropertyName("buy")]
-            public string Buy { get; set; }
-
-            [JsonPropertyName("sale")]
-            public string Sale { get; set; }
-        }
-
-        private async void Exchange_rate_Load(object sender, EventArgs e)
-        {
-            string url = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=11";
-
-            try
+            if (apiRates == null || !apiRates.Any())
             {
-                string jsonResponse = await client.GetStringAsync(url);
-
-                apiRates = JsonSerializer.Deserialize<List<CurrencyRate>>(jsonResponse);
-
-                apiRates.Add(new CurrencyRate { Ccy = "UAH", BaseCcy = "UAH", Buy = "1", Sale = "1" });
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Не вдалося завантажити курси: {ex.Message}");
+                MessageBox.Show("Помилка: не вдалося отримати дані про курси.");
+                this.Close();
+                return;
             }
 
-            CurrencyRate usdRate = apiRates.FirstOrDefault(rate => rate.Ccy == "USD");
-            CurrencyRate eurRate = apiRates.FirstOrDefault(rate => rate.Ccy == "EUR");
+            StandardCurrencyRate usdRate = apiRates.FirstOrDefault(rate => rate.Ccy == "USD");
+            StandardCurrencyRate eurRate = apiRates.FirstOrDefault(rate => rate.Ccy == "EUR");
 
-            decimal buyRate = decimal.Parse(usdRate.Buy, CultureInfo.InvariantCulture);
-            decimal saleRate = decimal.Parse(usdRate.Sale, CultureInfo.InvariantCulture);
-            label2.Text = $"{buyRate:N2}";
-            label3.Text = $"{saleRate:N2}";
+            // --- Обробка USD ---
+            if (usdRate != null)
+            {
+                if (bankName == "NBU")
+                {
+                    label2.Text = $"{usdRate.Buy:N2}"; // Тепер label2 буде знайдено
+                    label3.Text = "N/A";
+                }
+                else
+                {
+                    label2.Text = $"{usdRate.Buy:N2}";
+                    label3.Text = $"{usdRate.Sale:N2}";
+                }
+            }
+            else
+            {
+                label2.Text = "N/A";
+                label3.Text = "N/A";
+            }
 
-            decimal buyRateEur = decimal.Parse(eurRate.Buy, CultureInfo.InvariantCulture);
-            decimal saleRateEur = decimal.Parse(eurRate.Sale, CultureInfo.InvariantCulture);
-            label18.Text = $"{buyRateEur:N2}";
-            label17.Text = $"{saleRateEur:N2}";
-
-
+            // --- Обробка EUR ---
+            if (eurRate != null)
+            {
+                if (bankName == "NBU")
+                {
+                    label18.Text = $"{eurRate.Buy:N2}"; // Тепер label18 буде знайдено
+                    label17.Text = "N/A";
+                }
+                else
+                {
+                    label18.Text = $"{eurRate.Buy:N2}";
+                    label17.Text = $"{eurRate.Sale:N2}";
+                }
+            }
+            else
+            {
+                label18.Text = "N/A";
+                label17.Text = "N/A";
+            }
         }
 
+        // --- Ваші порожні обробники подій ---
         private void label7_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label21_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
