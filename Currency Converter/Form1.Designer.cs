@@ -50,7 +50,7 @@ namespace Currency_Converter
             lblDate = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
             Bank_btn = new System.Windows.Forms.Button();
-            button1 = new System.Windows.Forms.Button();
+            Histori_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pbSwapCurrency).BeginInit();
             SuspendLayout();
             // 
@@ -266,18 +266,19 @@ namespace Currency_Converter
             Bank_btn.UseVisualStyleBackColor = false;
             Bank_btn.Click += Bank_btn_Click;
             // 
-            // button1
+            // Histori_btn
             // 
-            button1.BackColor = System.Drawing.Color.Turquoise;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            button1.Location = new System.Drawing.Point(1007, 20);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(95, 69);
-            button1.TabIndex = 20;
-            button1.Text = "Історія";
-            button1.UseVisualStyleBackColor = false;
+            Histori_btn.BackColor = System.Drawing.Color.Turquoise;
+            Histori_btn.FlatAppearance.BorderSize = 0;
+            Histori_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            Histori_btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            Histori_btn.Location = new System.Drawing.Point(1007, 20);
+            Histori_btn.Name = "Histori_btn";
+            Histori_btn.Size = new System.Drawing.Size(95, 69);
+            Histori_btn.TabIndex = 20;
+            Histori_btn.Text = "Історія";
+            Histori_btn.UseVisualStyleBackColor = false;
+            Histori_btn.Click += Histori_btn_Click;
             // 
             // Form1
             // 
@@ -285,7 +286,7 @@ namespace Currency_Converter
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1143, 750);
-            Controls.Add(button1);
+            Controls.Add(Histori_btn);
             Controls.Add(Bank_btn);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -335,7 +336,7 @@ namespace Currency_Converter
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button Bank_btn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Histori_btn;
     }
 }
 

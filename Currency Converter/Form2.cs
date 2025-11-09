@@ -15,7 +15,7 @@ namespace Currency_Converter
 
         private void btnPrivat_Click_1(object sender, EventArgs e)
         {
-            SelectedBank = "Privat";
+            SelectedBank = "Privat_bank";
             this.Close();
         }
 
@@ -27,7 +27,7 @@ namespace Currency_Converter
 
         private void btnOschad_Click_1(object sender, EventArgs e)
         {
-            SelectedBank = "Oschad";
+            SelectedBank = "Monobank";
             this.Close();
         }
     }
