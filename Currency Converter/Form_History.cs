@@ -57,7 +57,6 @@ namespace Currency_Converter
 
         private void btnShowRateHistory_Click_1(object sender, EventArgs e)
         {
-            // this.rateHistoryDbPath - це шлях до dbPath2, який ви вже зберегли
             Form4 chartForm = new Form4(this.rateHistoryDbPath);
             chartForm.Show();
         }

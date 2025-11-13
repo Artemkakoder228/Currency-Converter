@@ -55,7 +55,7 @@
             btnShowRateHistory.Name = "btnShowRateHistory";
             btnShowRateHistory.Size = new System.Drawing.Size(476, 69);
             btnShowRateHistory.TabIndex = 14;
-            btnShowRateHistory.Text = "Історія курсу Pivat Bank";
+            btnShowRateHistory.Text = "Історія курсів валют ";
             btnShowRateHistory.UseVisualStyleBackColor = false;
             btnShowRateHistory.Click += btnShowRateHistory_Click_1;
             // 

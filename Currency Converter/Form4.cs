@@ -24,7 +24,7 @@ namespace Currency_Converter
         {
             chart1.Series.Clear();
             chart1.ChartAreas[0].AxisX.Title = "Дата";
-            chart1.ChartAreas[0].AxisY.Title = "Курс купівлі"; 
+            chart1.ChartAreas[0].AxisY.Title = "Курс купівлі";
             chart1.Titles.Add("Порівняння курсів USD (купівля)");
 
             chart1.Legends.Add(new Legend("DefaultLegend"));
@@ -88,6 +88,11 @@ namespace Currency_Converter
 
                 chart1.Series.Add(bankSeries);
             }
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

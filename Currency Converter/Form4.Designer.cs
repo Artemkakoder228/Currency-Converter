@@ -61,6 +61,7 @@
             chart1.Size = new System.Drawing.Size(768, 318);
             chart1.TabIndex = 1;
             chart1.Text = "chart1";
+            chart1.Click += chart1_Click;
             // 
             // Form4
             // 

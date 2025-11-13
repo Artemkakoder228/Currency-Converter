@@ -122,7 +122,7 @@
             btnNbu.Name = "btnNbu";
             btnNbu.Size = new System.Drawing.Size(319, 90);
             btnNbu.TabIndex = 68;
-            btnNbu.Text = "Приват банк";
+            btnNbu.Text = "НБУ";
             btnNbu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnNbu.UseVisualStyleBackColor = true;
             btnNbu.Click += btnNbu_Click_1;
@@ -135,7 +135,7 @@
             btnOschad.Name = "btnOschad";
             btnOschad.Size = new System.Drawing.Size(319, 90);
             btnOschad.TabIndex = 70;
-            btnOschad.Text = "Приват банк";
+            btnOschad.Text = "Monobank";
             btnOschad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnOschad.UseVisualStyleBackColor = true;
             btnOschad.Click += btnOschad_Click_1;
