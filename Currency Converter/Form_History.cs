@@ -7,31 +7,45 @@ namespace Currency_Converter
 {
     public partial class Form_History : Form
     {
-        private string rateHistoryDbPath;
+        private string _rateHistoryDbPath;
+        private string _conversionDbPath;
 
         public Form_History(string conversionDbPath, string rateDbPath)
         {
             InitializeComponent();
-            this.rateHistoryDbPath = rateDbPath;
-            LoadConversionHistory(conversionDbPath);
-        }
 
-        private void LoadConversionHistory(string dbPath)
+            this._conversionDbPath = conversionDbPath;
+            this._rateHistoryDbPath = rateDbPath;
+
+            LoadConversionHistory();
+        }
+        private void LoadConversionHistory()
         {
             try
             {
-                using (var connection = new SqliteConnection($"Data Source={dbPath}"))
+                using (var connection = new SqliteConnection($"Data Source={_conversionDbPath}"))
                 {
                     connection.Open();
-                    string query = "SELECT OperationDate, BankName, CurrencyFrom, AmountFrom, CurrencyTo, AmountTo, RateUsed FROM ConversionHistory ORDER BY OperationDate DESC";
+                    string query = @"
+                SELECT 
+                    OperationDate AS 'Дата', 
+                    BankName AS 'Банк', 
+                    CurrencyFrom AS 'З валюти', 
+                    ROUND(AmountFrom, 2) AS 'Сума', 
+                    CurrencyTo AS 'В валюту', 
+                    ROUND(AmountTo, 2) AS 'Результат', 
+                    ROUND(RateUsed, 2) AS 'Курс' 
+                FROM ConversionHistory 
+                ORDER BY OperationDate DESC";
 
                     using (var command = new SqliteCommand(query, connection))
+                    using (var reader = command.ExecuteReader())
                     {
-                        using (var reader = command.ExecuteReader())
-                        {
-                            DataTable dt = new DataTable();
-                            dt.Load(reader);
+                        DataTable dt = new DataTable();
+                        dt.Load(reader);
 
+                        if (dataGridConversionHistory != null)
+                        {
                             dataGridConversionHistory.DataSource = dt;
                             dataGridConversionHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                         }
@@ -40,25 +54,27 @@ namespace Currency_Converter
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Помилка завантаження історії конвертацій: {ex.Message}");
+                MessageBox.Show($"Помилка завантаження історії: {ex.Message}");
             }
         }
 
         private void btnShowRateHistory_Click(object sender, EventArgs e)
         {
-            Form4 rateHistoryForm = new Form4(this.rateHistoryDbPath);
-            rateHistoryForm.Show();
+            try
+            {
+                Currency_rate_and_grafic chartForm = new Currency_rate_and_grafic(this._rateHistoryDbPath);
+                chartForm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Не вдалося відкрити вікно графіка.\nПереконайтеся, що у форми Currency_rate_and_grafic є правильний конструктор.\nПомилка: {ex.Message}");
+            }
         }
+        private void dataGridConversionHistory_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
-        private void dataGridConversionHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Form_History_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnShowRateHistory_Click_1(object sender, EventArgs e)
-        {
-            Form4 chartForm = new Form4(this.rateHistoryDbPath);
-            chartForm.Show();
         }
     }
 }

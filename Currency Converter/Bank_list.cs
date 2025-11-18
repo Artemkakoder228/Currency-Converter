@@ -15,7 +15,7 @@ namespace Currency_Converter
 
         private void btnPrivat_Click_1(object sender, EventArgs e)
         {
-            SelectedBank = "Privat_bank";
+            SelectedBank = "GoogleFinance";
             this.Close();
         }
 
@@ -29,6 +29,11 @@ namespace Currency_Converter
         {
             SelectedBank = "Monobank";
             this.Close();
+        }
+
+        private void Bank_list_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

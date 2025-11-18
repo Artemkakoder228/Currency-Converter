@@ -32,7 +32,7 @@
             label1 = new System.Windows.Forms.Label();
             panel1 = new System.Windows.Forms.Panel();
             panel2 = new System.Windows.Forms.Panel();
-            btnPrivat = new System.Windows.Forms.Button();
+            btnGooglefinance = new System.Windows.Forms.Button();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             pictureBox2 = new System.Windows.Forms.PictureBox();
             pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -69,18 +69,18 @@
             panel2.Size = new System.Drawing.Size(462, 3);
             panel2.TabIndex = 63;
             // 
-            // btnPrivat
+            // btnGooglefinance
             // 
-            btnPrivat.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            btnPrivat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnPrivat.Location = new System.Drawing.Point(67, 100);
-            btnPrivat.Name = "btnPrivat";
-            btnPrivat.Size = new System.Drawing.Size(319, 90);
-            btnPrivat.TabIndex = 64;
-            btnPrivat.Text = "Приват банк";
-            btnPrivat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnPrivat.UseVisualStyleBackColor = true;
-            btnPrivat.Click += btnPrivat_Click_1;
+            btnGooglefinance.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            btnGooglefinance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnGooglefinance.Location = new System.Drawing.Point(67, 100);
+            btnGooglefinance.Name = "btnGooglefinance";
+            btnGooglefinance.Size = new System.Drawing.Size(319, 90);
+            btnGooglefinance.TabIndex = 64;
+            btnGooglefinance.Text = "Google finance";
+            btnGooglefinance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnGooglefinance.UseVisualStyleBackColor = true;
+            btnGooglefinance.Click += btnPrivat_Click_1;
             // 
             // pictureBox1
             // 
@@ -97,9 +97,9 @@
             // 
             pictureBox2.BackColor = System.Drawing.Color.White;
             pictureBox2.Image = (System.Drawing.Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new System.Drawing.Point(309, 237);
+            pictureBox2.Location = new System.Drawing.Point(299, 237);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new System.Drawing.Size(63, 62);
+            pictureBox2.Size = new System.Drawing.Size(73, 62);
             pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 66;
             pictureBox2.TabStop = false;
@@ -107,9 +107,9 @@
             // pictureBox3
             // 
             pictureBox3.Image = (System.Drawing.Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new System.Drawing.Point(308, 347);
+            pictureBox3.Location = new System.Drawing.Point(299, 347);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new System.Drawing.Size(64, 70);
+            pictureBox3.Size = new System.Drawing.Size(73, 70);
             pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 67;
             pictureBox3.TabStop = false;
@@ -162,11 +162,12 @@
             Controls.Add(panel2);
             Controls.Add(label1);
             Controls.Add(panel1);
-            Controls.Add(btnPrivat);
+            Controls.Add(btnGooglefinance);
             Controls.Add(btnOschad);
             Controls.Add(btnNbu);
             Name = "Bank_list";
             Text = "Bank_list";
+            Load += Bank_list_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -179,7 +180,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnPrivat;
+        private System.Windows.Forms.Button btnGooglefinance;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;

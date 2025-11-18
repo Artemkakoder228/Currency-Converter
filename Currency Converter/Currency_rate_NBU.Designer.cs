@@ -1,6 +1,6 @@
 ﻿namespace Currency_Converter
 {
-    partial class Form3
+    partial class Currency_rate_NBU
     {
         /// <summary>
         /// Required designer variable.
@@ -109,6 +109,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = System.Drawing.Color.White;
             label3.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             label3.Location = new System.Drawing.Point(60, 140);
             label3.Name = "label3";
@@ -120,7 +121,9 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = System.Drawing.Color.White;
             label4.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            label4.ForeColor = System.Drawing.Color.LimeGreen;
             label4.Location = new System.Drawing.Point(179, 140);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(107, 45);
@@ -130,7 +133,9 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = System.Drawing.Color.White;
             label5.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            label5.ForeColor = System.Drawing.Color.LimeGreen;
             label5.Location = new System.Drawing.Point(533, 140);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(107, 45);
@@ -140,6 +145,7 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = System.Drawing.Color.White;
             label6.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             label6.Location = new System.Drawing.Point(403, 140);
             label6.Name = "label6";
@@ -158,7 +164,9 @@
             // label8
             // 
             label8.AutoSize = true;
+            label8.BackColor = System.Drawing.Color.White;
             label8.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            label8.ForeColor = System.Drawing.Color.LimeGreen;
             label8.Location = new System.Drawing.Point(179, 265);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(107, 45);
@@ -168,6 +176,7 @@
             // label9
             // 
             label9.AutoSize = true;
+            label9.BackColor = System.Drawing.Color.White;
             label9.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             label9.Location = new System.Drawing.Point(60, 265);
             label9.Name = "label9";
@@ -186,7 +195,9 @@
             // label11
             // 
             label11.AutoSize = true;
+            label11.BackColor = System.Drawing.Color.White;
             label11.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            label11.ForeColor = System.Drawing.Color.LimeGreen;
             label11.Location = new System.Drawing.Point(525, 265);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(115, 45);
@@ -196,6 +207,7 @@
             // label12
             // 
             label12.AutoSize = true;
+            label12.BackColor = System.Drawing.Color.White;
             label12.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             label12.Location = new System.Drawing.Point(390, 265);
             label12.Name = "label12";
@@ -214,7 +226,9 @@
             // label14
             // 
             label14.AutoSize = true;
+            label14.BackColor = System.Drawing.Color.White;
             label14.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            label14.ForeColor = System.Drawing.Color.LimeGreen;
             label14.Location = new System.Drawing.Point(347, 377);
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(120, 45);
@@ -224,6 +238,7 @@
             // label15
             // 
             label15.AutoSize = true;
+            label15.BackColor = System.Drawing.Color.White;
             label15.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             label15.Location = new System.Drawing.Point(221, 377);
             label15.Name = "label15";
@@ -239,7 +254,7 @@
             label16.Size = new System.Drawing.Size(295, 91);
             label16.TabIndex = 97;
             // 
-            // Form3
+            // Currency_rate_NBU
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,7 +279,8 @@
             Controls.Add(panel2);
             Controls.Add(label1);
             Controls.Add(panel1);
-            Name = "Form3";
+            MinimizeBox = false;
+            Name = "Currency_rate_NBU";
             Text = "Currency Rates NBU";
             Load += Form3_Load;
             ResumeLayout(false);

@@ -17,12 +17,43 @@ namespace Currency_Converter
     public partial class Form1 : Form
     {
         private static readonly HttpClient client = new HttpClient();
+
         private List<StandardCurrencyRate> apiRates;
+
         private string selectedBank;
-        private readonly List<string> allowedCurrencies = new List<string> { "USD", "EUR", "PLN", "GBP", "CZK" };
+
+        private readonly List<string> allowedCurrencies = new List<string> { "USD", "EUR", "PLN", "GBP", "CZK", "JPY" };
 
         private string dbPath = Path.Combine(Application.StartupPath, "history.db");
         private string dbPath2 = Path.Combine(Application.StartupPath, "AllRateHistory.db");
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            System.Net.ServicePointManager.SecurityProtocol =
+                System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls13;
+
+            if (client.DefaultRequestHeaders.UserAgent.Count == 0)
+            {
+                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+            }
+
+            this.Opacity = 0;
+            this.ShowInTaskbar = false;
+
+            comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
+
+            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            gp.AddEllipse(0, 0, pbSwapCurrency.Width - 1, pbSwapCurrency.Height - 1);
+            pbSwapCurrency.Region = new System.Drawing.Region(gp);
+
+            RoundButton(Rates_Button, 60);
+            RoundButton(Bank_btn, 60);
+            RoundButton(btnConvert, 60);
+            RoundButton(Histori_btn, 60);
+        }
 
         private void InitializeDatabase()
         {
@@ -32,13 +63,13 @@ namespace Currency_Converter
                 string createTableQuery = @"
                 CREATE TABLE IF NOT EXISTS ConversionHistory (
                     OperationID     INTEGER PRIMARY KEY AUTOINCREMENT,
-                    OperationDate   DATETIME NOT_NULL,
-                    BankName        TEXT NOT_NULL,
-                    CurrencyFrom    TEXT NOT_NULL,
-                    AmountFrom      REAL NOT_NULL,
-                    CurrencyTo      TEXT NOT_NULL,
-                    AmountTo        REAL NOT_NULL,
-                    RateUsed        REAL NOT_NULL
+                    OperationDate   DATETIME NOT NULL,
+                    BankName        TEXT NOT NULL,
+                    CurrencyFrom    TEXT NOT NULL,
+                    AmountFrom      REAL NOT NULL,
+                    CurrencyTo      TEXT NOT NULL,
+                    AmountTo        REAL NOT NULL,
+                    RateUsed        REAL NOT NULL
                 );";
                 using (var command = connection.CreateCommand())
                 {
@@ -65,26 +96,6 @@ namespace Currency_Converter
                     command.ExecuteNonQuery();
                 }
             }
-        }
-
-        public Form1()
-        {
-            InitializeComponent();
-
-            this.Opacity = 0;
-            this.ShowInTaskbar = false;
-
-            comboBox1.SelectedIndex = -1;
-            comboBox2.SelectedIndex = -1;
-
-            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
-            gp.AddEllipse(0, 0, pbSwapCurrency.Width - 1, pbSwapCurrency.Height - 1);
-            pbSwapCurrency.Region = new System.Drawing.Region(gp);
-
-            RoundButton(Rates_Button, 60);
-            RoundButton(Bank_btn, 60);
-            RoundButton(btnConvert, 60);
-            RoundButton(Histori_btn, 60);
         }
 
         private void AddOperationToHistory(string bank, string fromCcy, decimal fromAmount, string toCcy, decimal toAmount, decimal rate)
@@ -164,7 +175,6 @@ namespace Currency_Converter
             this.ShowInTaskbar = true;
             await LoadDataForBank();
         }
-
         private async Task LoadDataForBank()
         {
             lblDate.Text = "Курс актуальний на " + DateTime.Now.ToString("dd.MM.yyyy");
@@ -175,20 +185,26 @@ namespace Currency_Converter
             {
                 switch (selectedBank)
                 {
-                    case "Privat":
-                        await LoadPrivatData();
+                    case "GoogleFinance":
+                        MessageBox.Show(this, "Завантаження ринкових курсів (Google Finance)...", "Інформація", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await LoadGoogleFinanceData();
                         break;
+
                     case "NBU":
-                        MessageBox.Show(this, "Ви обрали НБУ. Зверніть увагу: НБУ надає лише один офіційний курс, тому 'купівля' та 'продаж' будуть однаковими.",
-                                        "Інформація про курс",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Ви обрали НБУ. Зверніть увагу: НБУ надає лише один офіційний курс, тому 'купівля' та 'продаж' будуть однаковими.", "Інформація", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         await LoadNbuData();
                         break;
+
                     case "Monobank":
                         await LoadMonoData();
                         break;
+
+                    default:
+                        MessageBox.Show(this, "Завантаження ринкових курсів (Google Finance)...", "Інформація", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await LoadGoogleFinanceData();
+                        break;
                 }
+
                 try
                 {
                     AddRatesToHistory(apiRates, selectedBank);
@@ -199,12 +215,13 @@ namespace Currency_Converter
                 }
 
                 apiRates.Add(new StandardCurrencyRate { Ccy = "UAH", Buy = 1, Sale = 1, Name = "Українська гривня" });
+
                 lblResult.Text = "0.00";
                 PopulateCurrencyComboBoxes();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, $"Не вдалося завантажити курси: {ex.Message}");
+                MessageBox.Show(this, $"Не вдалося завантажити курси: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblResult.Text = "Помилка";
             }
         }
@@ -228,24 +245,48 @@ namespace Currency_Converter
 
         #region Методи завантаження даних
 
-        private async Task LoadPrivatData()
+        private async Task LoadGoogleFinanceData()
         {
-            string url = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=4";
+            string url = "https://api.exchangerate-api.com/v4/latest/UAH";
             string jsonResponse = await client.GetStringAsync(url);
-            var privatRates = JsonSerializer.Deserialize<List<PrivatCurrencyRate>>(jsonResponse);
+            var googleData = JsonSerializer.Deserialize<GoogleApiResponse>(jsonResponse);
 
-            foreach (var rate in privatRates)
+            if (googleData != null && googleData.Rates != null)
             {
-                if (allowedCurrencies.Contains(rate.Ccy))
+                foreach (string currencyCode in allowedCurrencies)
                 {
-                    apiRates.Add(new StandardCurrencyRate
+                    if (googleData.Rates.ContainsKey(currencyCode))
                     {
-                        Ccy = rate.Ccy,
-                        Buy = decimal.Parse(rate.Buy, CultureInfo.InvariantCulture),
-                        Sale = decimal.Parse(rate.Sale, CultureInfo.InvariantCulture),
-                        Name = (rate.Ccy == "USD") ? "Долар США" : "Євро"
-                    });
+                        decimal rateFromUah = googleData.Rates[currencyCode];
+                        decimal normalRate = 0;
+                        if (rateFromUah != 0)
+                        {
+                            normalRate = 1.0m / rateFromUah;
+                        }
+
+                        apiRates.Add(new StandardCurrencyRate
+                        {
+                            Ccy = currencyCode,
+                            Buy = normalRate,
+                            Sale = normalRate,
+                            Name = GetCurrencyName(currencyCode)
+                        });
+                    }
                 }
+            }
+        }
+
+        private string GetCurrencyName(string code)
+        {
+            switch (code)
+            {
+                case "USD": return "Долар США";
+                case "EUR": return "Євро";
+                case "PLN": return "Польський злотий";
+                case "GBP": return "Фунт стерлінгів";
+                case "CZK": return "Чеська крона";
+                case "JPY": return "Японська єна";
+                default: return code;
             }
         }
 
@@ -273,33 +314,27 @@ namespace Currency_Converter
             string jsonResponse = await client.GetStringAsync(url);
             var monoRates = JsonSerializer.Deserialize<List<MonoCurrencyRate>>(jsonResponse);
 
-            if (allowedCurrencies.Contains("USD"))
+            var isoCodes = new Dictionary<int, string>
             {
-                var usdRate = monoRates.FirstOrDefault(r => r.CurrencyCodeA == 840 && r.CurrencyCodeB == 980);
-                if (usdRate != null)
-                {
-                    apiRates.Add(new StandardCurrencyRate
-                    {
-                        Ccy = "USD",
-                        Buy = usdRate.RateBuy,
-                        Sale = usdRate.RateSell,
-                        Name = "Долар США"
-                    });
-                }
-            }
+                { 840, "USD" }, { 978, "EUR" }, { 985, "PLN" },
+                { 826, "GBP" }, { 203, "CZK" }, { 392, "JPY" }
+            };
 
-            if (allowedCurrencies.Contains("EUR"))
+            foreach (var rate in monoRates)
             {
-                var eurRate = monoRates.FirstOrDefault(r => r.CurrencyCodeA == 978 && r.CurrencyCodeB == 980);
-                if (eurRate != null)
+                if (rate.CurrencyCodeB == 980 && isoCodes.ContainsKey(rate.CurrencyCodeA))
                 {
-                    apiRates.Add(new StandardCurrencyRate
+                    string ccyStr = isoCodes[rate.CurrencyCodeA];
+                    if (allowedCurrencies.Contains(ccyStr))
                     {
-                        Ccy = "EUR",
-                        Buy = eurRate.RateBuy,
-                        Sale = eurRate.RateSell,
-                        Name = "Євро"
-                    });
+                        apiRates.Add(new StandardCurrencyRate
+                        {
+                            Ccy = ccyStr,
+                            Buy = rate.RateBuy,
+                            Sale = rate.RateSell,
+                            Name = GetCurrencyName(ccyStr)
+                        });
+                    }
                 }
             }
         }
@@ -356,22 +391,23 @@ namespace Currency_Converter
 
             if (fromRate == null || toRate == null)
             {
-                MessageBox.Show(this, "Обрана валюта не знайдена. Можливо, цей банк її не підтримує.");
+                MessageBox.Show(this, "Обрана валюта не знайдена.");
                 return;
             }
 
-            decimal fromBuyRate = fromRate.Buy;
-            decimal toSaleRate = toRate.Sale;
+            decimal fromVal = fromRate.Buy;
+            decimal toVal = toRate.Sale;
 
-            if (toSaleRate == 0)
+            if (toVal == 0)
             {
-                MessageBox.Show(this, "Курс продажу цільової валюти не може бути нульовим.");
+                MessageBox.Show(this, "Помилка курсу (ділення на нуль).");
                 return;
             }
 
-            decimal uahAmount = amount * fromBuyRate;
-            decimal result = uahAmount / toSaleRate;
-            decimal actualRate = fromBuyRate / toSaleRate;
+            decimal uahAmount = amount * fromVal;
+            decimal result = uahAmount / toVal;
+            decimal actualRate = fromVal / toVal;
+
             lblResult.Text = $"{result:N2}";
 
             try
@@ -387,7 +423,7 @@ namespace Currency_Converter
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, $"Не вдалося зберегти операцію в історію: {ex.Message}");
+                MessageBox.Show(this, $"Не вдалося зберегти операцію: {ex.Message}");
             }
         }
 
@@ -397,30 +433,14 @@ namespace Currency_Converter
 
             switch (selectedCurrency)
             {
-                case "USD":
-                    label5.Text = "$";
-                    break;
-                case "EUR":
-                    label5.Text = "€";
-                    break;
-                case "UAH":
-                    label5.Text = "₴";
-                    break;
-                case "GBP":
-                    label5.Text = "£";
-                    break;
-                case "JPY":
-                    label5.Text = "¥";
-                    break;
-                case "PLN":
-                    label5.Text = "zł";
-                    break;
-                case "CZK":
-                    label5.Text = "Kč";
-                    break;
-                default:
-                    label5.Text = "";
-                    break;
+                case "USD": label5.Text = "$"; break;
+                case "EUR": label5.Text = "€"; break;
+                case "UAH": label5.Text = "₴"; break;
+                case "GBP": label5.Text = "£"; break;
+                case "JPY": label5.Text = "¥"; break;
+                case "PLN": label5.Text = "zł"; break;
+                case "CZK": label5.Text = "Kč"; break;
+                default: label5.Text = ""; break;
             }
         }
 
@@ -447,42 +467,38 @@ namespace Currency_Converter
         private void label5_Click(object sender, EventArgs e) { }
         private void label4_Click(object sender, EventArgs e) { }
         private void label7_Click_1(object sender, EventArgs e) { }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (apiRates == null || !apiRates.Any())
             {
-                MessageBox.Show(this, "Дані про курси ще не завантажені.");
+                MessageBox.Show(this, "Дані ще не завантажені. Зачекайте секунду.");
                 return;
             }
 
-            if (selectedBank == "NBU")
+            switch (selectedBank)
             {
-                try
-                {
-                    Form3 nbuRatesForm = new Form3(apiRates);
-                    nbuRatesForm.ShowDialog();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, $"Не вдалося відкрити Form3. Переконайтеся, що вона існує. \n{ex.Message}");
-                }
-            }
-            else
-            {
-                List<StandardCurrencyRate> ratesForForm = apiRates
-                    .Select(r => new StandardCurrencyRate
-                    {
-                        Ccy = r.Ccy,
-                        Buy = r.Buy,
-                        Sale = r.Sale,
-                        Name = r.Name
-                    }).ToList();
+                case "NBU":
+                    Currency_rate_NBU nbuForm = new Currency_rate_NBU(apiRates);
+                    nbuForm.ShowDialog();
+                    break;
 
-                Exchange_rate ratesForm = new Exchange_rate(ratesForForm, selectedBank);
-                ratesForm.ShowDialog();
+                case "GoogleFinance":
+                case "Privat":
+                    Currency_rate_Google_finance googleForm = new Currency_rate_Google_finance(apiRates);
+                    googleForm.ShowDialog();
+                    break;
+
+                case "Monobank":
+                    Currency_rate_Monobank monoForm = new Currency_rate_Monobank(apiRates);
+                    monoForm.ShowDialog();
+                    break;
+
+                default:
+                    MessageBox.Show(this, "Для цього банку немає окремої форми.");
+                    break;
             }
         }
-
 
         private void Histori_btn_Click(object sender, EventArgs e)
         {
@@ -500,16 +516,16 @@ namespace Currency_Converter
         public string Name { get; set; }
     }
 
-    public class PrivatCurrencyRate
+    public class GoogleApiResponse
     {
-        [JsonPropertyName("ccy")]
-        public string Ccy { get; set; }
-        [JsonPropertyName("base_ccy")]
-        public string BaseCcy { get; set; }
-        [JsonPropertyName("buy")]
-        public string Buy { get; set; }
-        [JsonPropertyName("sale")]
-        public string Sale { get; set; }
+        [JsonPropertyName("base")]
+        public string Base { get; set; }
+
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
+
+        [JsonPropertyName("rates")]
+        public Dictionary<string, decimal> Rates { get; set; }
     }
 
     public class NbuCurrencyRate

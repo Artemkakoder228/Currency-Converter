@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace Currency_Converter
 {
-    public partial class Form3 : Form
+    public partial class Currency_rate_NBU : Form
     {
  
         private List<StandardCurrencyRate> _nbuRates;
 
 
-        public Form3(List<StandardCurrencyRate> rates)
+        public Currency_rate_NBU(List<StandardCurrencyRate> rates)
         {
             InitializeComponent();
             _nbuRates = rates;

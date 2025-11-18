@@ -1,6 +1,6 @@
 ﻿namespace Currency_Converter
 {
-    partial class Exchange_rate
+    partial class Currency_rate_Monobank
     {
         /// <summary>
         /// Required designer variable.
@@ -69,7 +69,6 @@
             label7.TabIndex = 24;
             label7.Text = "USD";
             label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            label7.Click += label7_Click;
             // 
             // label9
             // 
@@ -101,7 +100,6 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(0, 30);
             label2.TabIndex = 28;
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -166,7 +164,6 @@
             label21.TabIndex = 40;
             label21.Text = "EUR";
             label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            label21.Click += label21_Click;
             // 
             // label1
             // 
@@ -178,11 +175,11 @@
             label1.TabIndex = 55;
             label1.Text = "Курси валют";
             // 
-            // Exchange_rate
+            // Currency_rate_Monobank
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.LightGray;
+            BackColor = System.Drawing.SystemColors.Control;
             ClientSize = new System.Drawing.Size(697, 245);
             Controls.Add(label1);
             Controls.Add(label17);
@@ -197,9 +194,8 @@
             Controls.Add(label7);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "Exchange_rate";
-            Text = "Сurrency Rates Privat";
-            Load += Exchange_rate_Load;
+            Name = "Currency_rate_Monobank";
+            Text = "Сurrency Rates Monobank";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -306,6 +306,7 @@ namespace Currency_Converter
             Controls.Add(label1);
             Controls.Add(label4);
             Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            MaximizeBox = false;
             Name = "Form1";
             Text = "Currency Converter";
             Load += Form1_Load;

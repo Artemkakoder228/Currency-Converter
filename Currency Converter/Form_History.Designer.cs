@@ -57,7 +57,7 @@
             btnShowRateHistory.TabIndex = 14;
             btnShowRateHistory.Text = "Історія курсів валют ";
             btnShowRateHistory.UseVisualStyleBackColor = false;
-            btnShowRateHistory.Click += btnShowRateHistory_Click_1;
+            btnShowRateHistory.Click += btnShowRateHistory_Click;
             // 
             // label1
             // 
@@ -75,8 +75,10 @@
             Controls.Add(btnShowRateHistory);
             Controls.Add(dataGridConversionHistory);
             Controls.Add(label1);
+            MaximizeBox = false;
             Name = "Form_History";
             Text = "Form_Histori";
+            Load += Form_History_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridConversionHistory).EndInit();
             ResumeLayout(false);
         }
