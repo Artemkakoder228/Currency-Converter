@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Microsoft.Data.Sqlite;
 
@@ -17,8 +19,25 @@ namespace Currency_Converter
             this._conversionDbPath = conversionDbPath;
             this._rateHistoryDbPath = rateDbPath;
 
+            SetRoundedShape(btnShowRateHistory, 20);
+
             LoadConversionHistory();
         }
+
+        private void SetRoundedShape(Control control, int radius)
+        {
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddArc(0, 0, radius, radius, 180, 90);
+            gp.AddLine(radius, 0, control.Width - radius, 0);
+            gp.AddArc(control.Width - radius, 0, radius, radius, 270, 90);
+            gp.AddLine(control.Width, radius, control.Width, control.Height - radius);
+            gp.AddArc(control.Width - radius, control.Height - radius, radius, radius, 0, 90);
+            gp.AddLine(control.Width - radius, control.Height, radius, control.Height);
+            gp.AddArc(0, control.Height - radius, radius, radius, 90, 90);
+            gp.CloseFigure();
+            control.Region = new Region(gp);
+        }
+
         private void LoadConversionHistory()
         {
             try
@@ -70,6 +89,7 @@ namespace Currency_Converter
                 MessageBox.Show($"Не вдалося відкрити вікно графіка.\nПереконайтеся, що у форми Currency_rate_and_grafic є правильний конструктор.\nПомилка: {ex.Message}");
             }
         }
+
         private void dataGridConversionHistory_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
         private void Form_History_Load(object sender, EventArgs e)

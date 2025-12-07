@@ -16,24 +16,26 @@ namespace Currency_Converter
         private void btnPrivat_Click_1(object sender, EventArgs e)
         {
             SelectedBank = "GoogleFinance";
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void btnNbu_Click_1(object sender, EventArgs e)
         {
             SelectedBank = "NBU";
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void btnOschad_Click_1(object sender, EventArgs e)
         {
             SelectedBank = "Monobank";
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void Bank_list_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
