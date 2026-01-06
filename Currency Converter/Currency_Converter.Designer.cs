@@ -135,7 +135,6 @@ namespace Currency_Converter
             label2.Size = new System.Drawing.Size(384, 65);
             label2.TabIndex = 2;
             label2.Text = "Оберіть валюту";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -236,7 +235,6 @@ namespace Currency_Converter
             lblDate.Name = "lblDate";
             lblDate.Size = new System.Drawing.Size(0, 32);
             lblDate.TabIndex = 10;
-            lblDate.Click += lblDate_Click;
             // 
             // label7
             // 
@@ -246,7 +244,6 @@ namespace Currency_Converter
             label7.TabIndex = 18;
             label7.Text = "🕑";
             label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            label7.Click += label7_Click_1;
             // 
             // Bank_btn
             // 
@@ -299,7 +296,6 @@ namespace Currency_Converter
             label8.TabIndex = 22;
             label8.Text = "Corrency Converter";
             label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            label8.Click += label8_Click;
             // 
             // label9
             // 
@@ -336,7 +332,6 @@ namespace Currency_Converter
             label5.Size = new System.Drawing.Size(419, 65);
             label5.TabIndex = 26;
             label5.Text = "Сума конвертації";
-            label5.Click += label5_Click_1;
             // 
             // label12
             // 
@@ -483,7 +478,7 @@ namespace Currency_Converter
             // pictureBox10
             // 
             pictureBox10.Image = (System.Drawing.Image)resources.GetObject("pictureBox10.Image");
-            pictureBox10.Location = new System.Drawing.Point(244, 395);
+            pictureBox10.Location = new System.Drawing.Point(244, 392);
             pictureBox10.Name = "pictureBox10";
             pictureBox10.Size = new System.Drawing.Size(57, 50);
             pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -493,7 +488,7 @@ namespace Currency_Converter
             // pictureBox11
             // 
             pictureBox11.Image = (System.Drawing.Image)resources.GetObject("pictureBox11.Image");
-            pictureBox11.Location = new System.Drawing.Point(244, 395);
+            pictureBox11.Location = new System.Drawing.Point(244, 392);
             pictureBox11.Name = "pictureBox11";
             pictureBox11.Size = new System.Drawing.Size(57, 50);
             pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -513,7 +508,7 @@ namespace Currency_Converter
             // pictureBox13
             // 
             pictureBox13.Image = (System.Drawing.Image)resources.GetObject("pictureBox13.Image");
-            pictureBox13.Location = new System.Drawing.Point(244, 395);
+            pictureBox13.Location = new System.Drawing.Point(244, 392);
             pictureBox13.Name = "pictureBox13";
             pictureBox13.Size = new System.Drawing.Size(57, 50);
             pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -523,7 +518,7 @@ namespace Currency_Converter
             // pictureBox14
             // 
             pictureBox14.Image = (System.Drawing.Image)resources.GetObject("pictureBox14.Image");
-            pictureBox14.Location = new System.Drawing.Point(244, 393);
+            pictureBox14.Location = new System.Drawing.Point(244, 392);
             pictureBox14.Name = "pictureBox14";
             pictureBox14.Size = new System.Drawing.Size(57, 50);
             pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -533,7 +528,7 @@ namespace Currency_Converter
             // pictureBox15
             // 
             pictureBox15.Image = (System.Drawing.Image)resources.GetObject("pictureBox15.Image");
-            pictureBox15.Location = new System.Drawing.Point(244, 395);
+            pictureBox15.Location = new System.Drawing.Point(244, 392);
             pictureBox15.Name = "pictureBox15";
             pictureBox15.Size = new System.Drawing.Size(57, 50);
             pictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -573,7 +568,7 @@ namespace Currency_Converter
             // pictureBox18
             // 
             pictureBox18.Image = (System.Drawing.Image)resources.GetObject("pictureBox18.Image");
-            pictureBox18.Location = new System.Drawing.Point(1059, 392);
+            pictureBox18.Location = new System.Drawing.Point(1059, 394);
             pictureBox18.Name = "pictureBox18";
             pictureBox18.Size = new System.Drawing.Size(57, 50);
             pictureBox18.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -603,7 +598,7 @@ namespace Currency_Converter
             // pictureBox21
             // 
             pictureBox21.Image = (System.Drawing.Image)resources.GetObject("pictureBox21.Image");
-            pictureBox21.Location = new System.Drawing.Point(1059, 393);
+            pictureBox21.Location = new System.Drawing.Point(1059, 392);
             pictureBox21.Name = "pictureBox21";
             pictureBox21.Size = new System.Drawing.Size(57, 50);
             pictureBox21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -664,6 +659,7 @@ namespace Currency_Converter
             Controls.Add(label9);
             Controls.Add(label10);
             Controls.Add(label11);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             MaximizeBox = false;
             Name = "Crypto_form";

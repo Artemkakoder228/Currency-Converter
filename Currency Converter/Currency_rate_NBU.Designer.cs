@@ -279,6 +279,7 @@
             Controls.Add(panel2);
             Controls.Add(label1);
             Controls.Add(panel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MinimizeBox = false;
             Name = "Currency_rate_NBU";
             Text = "Currency Rates NBU";

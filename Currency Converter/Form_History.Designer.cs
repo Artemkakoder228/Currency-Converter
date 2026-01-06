@@ -75,6 +75,7 @@
             Controls.Add(btnShowRateHistory);
             Controls.Add(dataGridConversionHistory);
             Controls.Add(label1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "Form_History";
             Text = "Form_Histori";

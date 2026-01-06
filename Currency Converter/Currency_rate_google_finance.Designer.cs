@@ -194,6 +194,8 @@
             Controls.Add(label7);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "Currency_rate_Google_finance";
             Text = "Currency Rates Google finance";
             Load += Currency_rate_Google_finance_Load;

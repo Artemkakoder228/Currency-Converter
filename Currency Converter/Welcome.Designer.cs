@@ -158,10 +158,11 @@
             Controls.Add(panel1);
             Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             ForeColor = System.Drawing.Color.FromArgb(200, 0, 255);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             Margin = new System.Windows.Forms.Padding(5);
+            MaximizeBox = false;
             Name = "Welcome";
             Text = "Welcome Page";
-            Load += Welcome_Load;
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel1.ResumeLayout(false);
